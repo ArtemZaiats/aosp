@@ -20,6 +20,8 @@ PRODUCT_COPY_FILES += \
 $(call inherit-product, device/generic/car/common/car.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_x86_64.mk)
 
+# Phony target that removes inherited packages
+PRODUCT_PACKAGES += remove_apps
 
 PRODUCT_NAME := aosp_testdevice_x86_64
 PRODUCT_MANUFACTURER := TestDevice
