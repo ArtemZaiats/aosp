@@ -15,8 +15,12 @@
 
 # Bootanimation
 PRODUCT_COPY_FILES += \
-	device/generic/car/aosp_testdevice/aosp_testdevice_x86_64/bootanimation.zip:system/media/bootanimation.zip
+		device/generic/car/aosp_testdevice/aosp_testdevice_x86_64/bootanimation.zip:system/media/bootanimation.zip
 
+# Overlays for device
+DEVICE_PACKAGE_OVERLAYS += \
+		device/generic/car/aosp_testdevice/aosp_testdevice_x86_64/overlay
+				
 $(call inherit-product, device/generic/car/common/car.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_x86_64.mk)
 
