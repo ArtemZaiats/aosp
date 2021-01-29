@@ -1,0 +1,56 @@
+
+package vendor.testdevice.dummy@1.0;
+
+import IDummyCallback;
+
+/**
+ * IDummy implements a dummy hal
+ */
+interface IDummy {
+    /**
+     * Register a callback for any health info events.
+     *
+     * Registering a new callback must not unregister the old one; the old
+     * callback remains registered until one of the following happens:
+     * - A client explicitly calls {@link unregisterCallback} to unregister it.
+     * - The client process that hosts the callback dies.
+     *
+     * @param callback the callback to register.
+     * @return result SUCCESS if successful,
+     *                UNKNOWN for other errors.
+     */
+    registerCallback(IDummyCallback callback) generates (Result result);
+
+    /**
+     * Explicitly unregister a callback that is previously registered through
+     * {@link registerCallback}.
+     *
+     * @param callback the callback to unregister
+     * @return result SUCCESS if successful,
+     *                NOT_FOUND if callback is not registered previously,
+     *                UNKNOWN for other errors.
+     */
+    unregisterCallback(IDummyCallback callback) generates (Result result);
+
+    /**
+     * Schedule update.
+     *
+     * When update() is called, the service must notify all registered callbacks
+     * with the most recent message.
+     *
+     * @return result SUCCESS if successful,
+     *                CALLBACK_DIED if any registered callback is dead,
+     *                UNKNOWN for other errors.
+     */
+    update() generates (Result result);
+
+    /**
+     * Get string from HAL.
+     *
+     * @return result SUCCESS if successful,
+     *                UNKNOWN for other errors.
+     * @return msg string message.
+     */
+    getMsg() generates (Result result, string msg);
+
+};

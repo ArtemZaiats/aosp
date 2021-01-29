@@ -1,0 +1,2 @@
+allow shell hal_dummy_default:binder call;
+allow shell exported_config_prop:property_service set;

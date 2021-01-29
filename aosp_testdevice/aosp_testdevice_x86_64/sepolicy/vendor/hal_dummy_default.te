@@ -1,0 +1,10 @@
+type hal_dummy_default, domain;
+hal_server_domain(hal_dummy_default, hal_dummy)
+
+type hal_dummy_default_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_dummy_default)
+
+binder_call(hal_dummy_client, hal_dummy_server)
+binder_call(hal_dummy_server, hal_dummy_client)
+
+hal_attribute_hwservice(hal_dummy, hal_dummy_hwservice)

@@ -1,0 +1,11 @@
+
+package vendor.testdevice.dummy@1.0;
+
+/**
+ */
+interface IDummyCallback {
+    /**
+     * @param msg message to send.
+     */
+    oneway handleMsg(string msg);
+};

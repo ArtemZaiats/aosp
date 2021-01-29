@@ -1,0 +1,9 @@
+package vendor.testdevice.dummy@1.0;
+
+enum Result : int32_t {
+    SUCCESS,
+    NOT_SUPPORTED,
+    UNKNOWN,
+    NOT_FOUND,
+    CALLBACK_DIED,
+};

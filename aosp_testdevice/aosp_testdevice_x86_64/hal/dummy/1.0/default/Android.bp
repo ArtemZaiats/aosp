@@ -1,0 +1,22 @@
+// FIXME: your file license if you have one
+
+cc_binary {
+    name: "vendor.testdevice.dummy@1.0-service",
+    relative_install_path: "hw",
+    proprietary: true,
+    init_rc: ["vendor.testdevice.dummy@1.0-service.rc"],
+    vintf_fragments: ["vendor.testdevice.dummy@1.0-service.xml"],
+    srcs: [
+        "service.cpp",
+        "Dummy.cpp",
+        "DummyCallback.cpp",
+    ],
+    shared_libs: [
+        "libbase",
+        "libutils",
+        "libbinder",
+        "libhidlbase",
+        "libhidltransport",
+        "vendor.testdevice.dummy@1.0",
+    ],
+}

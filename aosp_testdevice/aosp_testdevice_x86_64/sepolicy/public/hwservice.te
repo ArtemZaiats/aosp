@@ -1,0 +1,1 @@
+type hal_dummy_hwservice, hwservice_manager_type;

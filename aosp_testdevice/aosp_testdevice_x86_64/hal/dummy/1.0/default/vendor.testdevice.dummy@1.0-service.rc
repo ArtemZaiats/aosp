@@ -1,0 +1,4 @@
+service dummy-1-0 /vendor/bin/hw/vendor.testdevice.dummy@1.0-service
+    class hal
+    user system
+    group system
