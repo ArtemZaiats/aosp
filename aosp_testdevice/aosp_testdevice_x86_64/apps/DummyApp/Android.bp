@@ -1,0 +1,32 @@
+android_app {
+    name: "DummyApp",
+
+    srcs: [
+        "app/src/main/java/**/*.java",
+        "app/src/main/aidl/com/gl/dummyservice/IDummyService.aidl",
+    ],
+
+    aidl: {
+	     local_include_dirs: [
+		     "app/src/main/aidl/com/gl/dummyservice",
+	          ],
+        },
+
+    dex_preopt: {
+	enabled: false,
+    },
+
+    resource_dirs: ["app/src/main/res"],
+    manifest: "app/src/main/AndroidManifest.xml",
+
+    privileged: true,
+    certificate: "platform",
+    platform_apis: true,
+
+    static_libs: [
+        "com.google.android.material_material",
+        "androidx-constraintlayout_constraintlayout",
+        "vendor.testdevice.dummy-V1.0-java",
+        "android.hidl.base-V1.0-java",
+    ],
+}
