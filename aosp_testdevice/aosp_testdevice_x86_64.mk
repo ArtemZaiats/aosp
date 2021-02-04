@@ -25,10 +25,16 @@ $(call inherit-product, device/generic/car/common/car.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_x86_64.mk)
 
 # Phony target that removes inherited packages
-PRODUCT_PACKAGES += remove_apps
+#PRODUCT_PACKAGES += remove_apps
 
 # Dummy HAL
 PRODUCT_PACKAGES += vendor.testdevice.dummy@1.0-service
+
+# Dummy app
+PRODUCT_PACKAGES += DummyApp
+
+# Dummy service
+PRODUCT_PACKAGES += DummyService
 
 PRODUCT_NAME := aosp_testdevice_x86_64
 PRODUCT_MANUFACTURER := TestDevice
@@ -39,9 +45,6 @@ PRODUCT_MODEL := Car on x86_64 emulator
 # Vendor Interface Manifest
 DEVICE_MANIFEST_FILE := device/generic/car/aosp_testdevice/aosp_testdevice_x86_64/manifest.xml
 
-BOARD_VENDOR_SEPOLICY_DIRS += \
-	device/generic/car/aosp_testdevice/aosp_testdevice_x86_64/sepolicy/vendor
-BOARD_PLAT_PUBLIC_SEPOLICY_DIR += \
-	device/generic/car/aosp_testdevice/aosp_testdevice_x86_64/sepolicy/public
-BOARD_PLAT_PRIVATE_SEPOLICY_DIR += \
-	device/generic/car/aosp_testdevice/aosp_testdevice_x86_64/sepolicy/private
+BOARD_VENDOR_SEPOLICY_DIRS += device/generic/car/aosp_testdevice/aosp_testdevice_x86_64/sepolicy/vendor
+BOARD_PLAT_PUBLIC_SEPOLICY_DIR += device/generic/car/aosp_testdevice/aosp_testdevice_x86_64/sepolicy/public
+BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/generic/car/aosp_testdevice/aosp_testdevice_x86_64/sepolicy/private
