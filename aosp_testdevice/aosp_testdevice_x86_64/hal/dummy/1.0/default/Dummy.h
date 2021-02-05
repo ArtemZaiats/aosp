@@ -32,6 +32,9 @@ struct Dummy : public IDummy {
     // Methods from ::android::hidl::base::V1_0::IBase follow.
 
 private:
+    void thread_task();
+	  std::atomic<bool>  mThreadExit { false };
+	  std::thread mThread;
     std::mutex callbacks_lock_;
     sp<IDummyCallback> callback_;
     hidl_string msg_;
