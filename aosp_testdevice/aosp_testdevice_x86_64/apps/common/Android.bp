@@ -1,0 +1,12 @@
+filegroup {
+    name: "IDummyService.aidl",
+    srcs: [ "aidl/com/gl/dummyservice/IDummyService.aidl" ],
+    path: "aidl",
+}
+
+aidl_interface {
+    name: "libaidl",
+    srcs: ["aidl/com/gl/dummyservice/IDummyService.aidl"],
+    local_include_dir: "aidl",
+    vendor_available: true,
+}

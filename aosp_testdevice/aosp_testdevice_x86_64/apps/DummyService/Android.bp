@@ -1,10 +1,10 @@
 android_app {
-    name: "DummyApp",
+    name: "DummyService",
 
     srcs: [
         "app/src/main/java/**/*.java",
         ":IDummyService.aidl",
-      ],
+    ],
 
     dex_preopt: {
 	     enabled: false,
