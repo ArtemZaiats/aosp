@@ -3,7 +3,6 @@ android_app {
 
     srcs: [
         "app/src/main/java/**/*.java",
-        ":IDummyService.aidl",
       ],
 
     dex_preopt: {
@@ -22,6 +21,7 @@ android_app {
         "androidx-constraintlayout_constraintlayout",
         "vendor.testdevice.dummy-V1.0-java",
         "android.hidl.base-V1.0-java",
+        "aidlservicedummy-java",
+        "aidlcallbackdummy-java",
       ],
-      
 }

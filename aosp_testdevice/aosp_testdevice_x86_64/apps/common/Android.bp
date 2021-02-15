@@ -1,12 +1,26 @@
-filegroup {
-    name: "IDummyService.aidl",
-    srcs: [ "aidl/com/gl/dummyservice/IDummyService.aidl" ],
-    path: "aidl",
+aidl_interface {
+    name: "aidlservicedummy",
+    srcs: [
+        "aidl/com/gl/dummyservice/IDummyService.aidl",
+        ],
+    imports: ["aidlcallbackdummy"],
+    local_include_dir: "aidl",
+    backend: {
+        java: {
+            enabled: true,
+        },
+    },
 }
 
 aidl_interface {
-    name: "libaidl",
-    srcs: ["aidl/com/gl/dummyservice/IDummyService.aidl"],
+    name: "aidlcallbackdummy",
+    srcs: [
+        "aidl/com/gl/dummyservice/IDummyServiceCallback.aidl",
+        ],
     local_include_dir: "aidl",
-    vendor_available: true,
+    backend: {
+        java: {
+            enabled: true,
+        },
+    },
 }

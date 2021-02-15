@@ -2,18 +2,15 @@ package com.gl.dummyservice;
 
 import android.app.Service;
 import android.content.Intent;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
+import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.NoSuchElementException;
 
 import vendor.testdevice.dummy.V1_0.IDummy;
 import vendor.testdevice.dummy.V1_0.IDummyCallback.Stub;
-import com.gl.dummyservice.IDummyService;
 
 public class DummyService extends Service {
 
@@ -22,12 +19,13 @@ public class DummyService extends Service {
     private IDummy hal;
     private ServiceCallback callback = new ServiceCallback();
 
+    final RemoteCallbackList<IDummyServiceCallback> mCallbacks = new RemoteCallbackList<>();
+
     class ServiceCallback extends vendor.testdevice.dummy.V1_0.IDummyCallback.Stub {
 
         @Override
         public void handleMsg(String message) {
-            new Handler(Looper.getMainLooper()).post(() ->
-                    toastMessage("handleMsg: " + message));
+            toastMessage("handleMsg: " + message);
         }
     }
 
@@ -39,7 +37,6 @@ public class DummyService extends Service {
     public void onCreate() {
         super.onCreate();
         Log.d(TAG, "onCreate()");
-
         try {
             hal = vendor.testdevice.dummy.V1_0.IDummy.getService("default", true);
         } catch (NoSuchElementException e) {
@@ -85,7 +82,6 @@ public class DummyService extends Service {
                     toastMessage("getMsg: null HAL.");
                 }
             }
-
             @Override
             public void update() throws RemoteException {
                 Log.d(TAG, "update(String message)");
@@ -95,11 +91,26 @@ public class DummyService extends Service {
                     toastMessage("update: null HAL.");
                 }
             }
+            @Override
+            public void registerCallback(IDummyServiceCallback cb) {
+                if(cb != null) mCallbacks.register(cb);
+            }
+            @Override
+            public void unregisterCallback(IDummyServiceCallback cb) {
+                if(cb != null) mCallbacks.unregister(cb);
+            }
         };
     }
 
     private void toastMessage(String message) {
-        Toast toast = Toast.makeText (getApplicationContext(), message, Toast.LENGTH_SHORT);
-        toast.show();
+        final int N = mCallbacks.beginBroadcast();
+        for(int i = 0; i < N; i++) {
+            try{
+                mCallbacks.getBroadcastItem(i).valueChanged(message);
+            } catch (RemoteException e) {
+                Log.e(TAG, "toastMessage: Error",e );
+            }
+        }
+        mCallbacks.finishBroadcast();
     }
 }
