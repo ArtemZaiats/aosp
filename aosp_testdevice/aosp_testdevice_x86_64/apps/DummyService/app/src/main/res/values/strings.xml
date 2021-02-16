@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">DummyService</string>
+    <string name="service_started">DummyService has started</string>
+
+    <string name="start_service">Start service</string>
+    <string name="stop_service">Stop service</string>
+    <string name="channel_name">ANDROID_CHANNEL</string>
 </resources>
